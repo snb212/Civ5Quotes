@@ -33,10 +33,13 @@ public class QuotePageActivity extends Activity {
 		if (data != null) { 
 			   incomingHash = new Hashtable<String, String>((HashMap<String, String>)data); 
 			} 
-		
+		String[] quoteItem;
+		quoteItem = decompileQuote(quote, incomingHash);
 		TextView tv = (TextView) findViewById(R.id.quoteField);
+		TextView author = (TextView) findViewById(R.id.authorField);
 		//tv.setText(quote);
-		tv.setText((incomingHash.get(quote)).toString());
+		tv.setText(quoteItem[1]);
+		author.setText(quoteItem[2]);
 		
 	}
 
@@ -72,6 +75,25 @@ public class QuotePageActivity extends Activity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	public String[] decompileQuote(String name, Hashtable<String, String> table){
+		String quote = null;
+		String author = null;		
+		String[] quoteSections = new String[3];
+		String tableText = (table.get(name)).toString();
+		for(int i = 0; i<tableText.length(); i++ ){
+			if (tableText.charAt(i) == ','){
+				quote = tableText.substring(0, i);
+				author = tableText.substring(i+1, tableText.length());
+			}
+		quoteSections[0] = name;
+		quoteSections[1] = quote;
+		quoteSections[2] = author;
+		
+		}
+		
+		
+		return quoteSections;
 	}
 
 }
