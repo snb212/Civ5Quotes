@@ -32,7 +32,7 @@ public class MainActivity extends Activity {
 		final ListView lv = (ListView) findViewById(R.id.listview);
 		elements = quoteList.toArray(new String[quoteList.size()]);
 		lv.setAdapter(new ArrayAdapter<String>(this.getApplicationContext(),
-				R.layout.custom_list_item, elements));
+				R.drawable.custom_list_item, elements));
 		//this.removeView();
 		//((ViewGroup)MainActivity.getParent()).removeallViews();
 		lv.setOnItemClickListener(new OnItemClickListener(){

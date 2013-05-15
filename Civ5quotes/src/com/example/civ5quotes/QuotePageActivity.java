@@ -18,6 +18,7 @@ public class QuotePageActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		//getWindow().setBackgroundDrawableResource(R.drawable.quoteback);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_quote_page);
 		// Show the Up button in the action bar.
