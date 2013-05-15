@@ -5,5 +5,7 @@
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_quote_page">QuotePageActivity</string>
-
+    <string name="acoustics">Their rising all at once was as the sound of a thunder heard remote.</string>
+	<string name="advanced_ballistics">Once the rockets are up, who cares where they come down?</string>
+    
 </resources>

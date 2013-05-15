@@ -51,8 +51,8 @@ public class MainActivity extends Activity {
 	}
 
 	public void populateQuoteList() {
-		quoteList.add("Quote 1");
-		quoteList.add("Quote 2");
+		quoteList.add("Acoustics");
+		quoteList.add("Advanced Ballistics");
 	}
 
 	public void quoteClick(View view) {

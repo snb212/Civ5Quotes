@@ -25,6 +25,7 @@ public class QuotePageActivity extends Activity {
 		TextView tv = (TextView) findViewById(R.id.quoteField);
 		tv.setText(quote);
 		
+		
 	}
 
 	/**
