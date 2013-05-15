@@ -3,17 +3,20 @@ package com.example.civ5quotes;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 public class MainActivity extends Activity {
 	private ArrayList<String> quoteList = new ArrayList<String>();
 	private String[] elements = {};
+	private final Context context = this;
 	public final static String EXTRA_MESSAGE = "com.example.civ5quotes.MESSAGE";
 
 	@Override
@@ -23,10 +26,21 @@ public class MainActivity extends Activity {
 
 		populateQuoteList();
 
-		ListView lv = (ListView) findViewById(R.id.elementList);
+		final ListView lv = (ListView) findViewById(R.id.listview);
 		elements = quoteList.toArray(new String[quoteList.size()]);
 		lv.setAdapter(new ArrayAdapter<String>(this.getApplicationContext(),
 				R.layout.custom_list_item, elements));
+		//this.removeView();
+		//((ViewGroup)MainActivity.getParent()).removeallViews();
+		lv.setOnItemClickListener(new OnItemClickListener(){
+			public void onItemClick(AdapterView<?> arg0, View v, int position, long id){
+				String quote = "Blue Moon";
+				Intent intent = new Intent(context, QuotePageActivity.class);
+				quote = (lv.getItemAtPosition(position)).toString();
+				intent.putExtra(EXTRA_MESSAGE, quote);
+				startActivity(intent);
+		     }
+		});
 	}
 
 	@Override
@@ -43,11 +57,11 @@ public class MainActivity extends Activity {
 
 	public void quoteClick(View view) {
 		// starts a new activity based on the quote clicked
-	
-		
-		Intent intent = new Intent(this, DisplayMessageActivity.class);
-		intent.putExtra(EXTRA_MESSAGE, message);
-		startActivity(intent);
+
+		// String quote = "Blue Moon";
+		// Intent intent = new Intent(this, QuotePageActivity.class);
+		// intent.putExtra(EXTRA_MESSAGE, quote);
+		// startActivity(intent);
 
 	}
 }
