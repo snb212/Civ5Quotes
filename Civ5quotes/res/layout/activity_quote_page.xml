@@ -10,8 +10,11 @@
 
     <TextView
         android:id="@+id/quoteField"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:text="@string/hello_world" 
+        android:textSize="24sp"
+        android:gravity="center_horizontal"
+        />
 
 </RelativeLayout>
