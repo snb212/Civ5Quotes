@@ -1,5 +1,9 @@
 package com.example.civ5quotes;
 
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Hashtable;
+
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
@@ -22,9 +26,17 @@ public class QuotePageActivity extends Activity {
 		Intent intent = getIntent();
 		String quote = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
 		
-		TextView tv = (TextView) findViewById(R.id.quoteField);
-		tv.setText(quote);
+		//recieve hash table
+		Hashtable<String, String> incomingHash = null;
+		Serializable data = intent.getSerializableExtra("hash");
+		//incomingHash = (Hashtable<String, String>)data;
+		if (data != null) { 
+			   incomingHash = new Hashtable<String, String>((HashMap<String, String>)data); 
+			} 
 		
+		TextView tv = (TextView) findViewById(R.id.quoteField);
+		//tv.setText(quote);
+		tv.setText((incomingHash.get(quote)).toString());
 		
 	}
 

@@ -1,6 +1,7 @@
 package com.example.civ5quotes;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 
 import android.app.Activity;
 import android.content.Context;
@@ -18,6 +19,7 @@ public class MainActivity extends Activity {
 	private String[] elements = {};
 	private final Context context = this;
 	public final static String EXTRA_MESSAGE = "com.example.civ5quotes.MESSAGE";
+	public Hashtable<String, String> quoteHash; 
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +27,7 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 
 		populateQuoteList();
+		quoteHash = populateHashtable();
 
 		final ListView lv = (ListView) findViewById(R.id.listview);
 		elements = quoteList.toArray(new String[quoteList.size()]);
@@ -38,6 +41,7 @@ public class MainActivity extends Activity {
 				Intent intent = new Intent(context, QuotePageActivity.class);
 				quote = (lv.getItemAtPosition(position)).toString();
 				intent.putExtra(EXTRA_MESSAGE, quote);
+				intent.putExtra("hash", quoteHash);
 				startActivity(intent);
 		     }
 		});
@@ -63,5 +67,12 @@ public class MainActivity extends Activity {
 		// intent.putExtra(EXTRA_MESSAGE, quote);
 		// startActivity(intent);
 
+	}
+	public Hashtable<String, String> populateHashtable(){
+		Hashtable <String, String> table = new Hashtable<String, String>(); 
+		table.put("Acoustics", "Their rising all at once was as the sound of a thunder heard remote");
+		table.put("Advanced Ballistics", "Once the rockets are up, who cares where they come down?");
+		
+		return table;
 	}
 }
