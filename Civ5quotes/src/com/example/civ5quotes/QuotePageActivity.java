@@ -1,47 +1,54 @@
 package com.example.civ5quotes;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Hashtable;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 public class QuotePageActivity extends Activity {
-
+	private final Context context = this;
+	private String name;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		//getWindow().setBackgroundDrawableResource(R.drawable.quoteback);
+		// getWindow().setBackgroundDrawableResource(R.drawable.quoteback);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_quote_page);
 		// Show the Up button in the action bar.
 		setupActionBar();
-		
+
 		Intent intent = getIntent();
 		String quote = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
-		
-		//recieve hash table
+
+		// recieve hash table
 		Hashtable<String, String> incomingHash = null;
 		Serializable data = intent.getSerializableExtra("hash");
-		//incomingHash = (Hashtable<String, String>)data;
-		if (data != null) { 
-			   incomingHash = new Hashtable<String, String>((HashMap<String, String>)data); 
-			} 
+		// incomingHash = (Hashtable<String, String>)data;
+		if (data != null) {
+			incomingHash = new Hashtable<String, String>(
+					(HashMap<String, String>) data);
+		}
 		String[] quoteItem;
 		quoteItem = decompileQuote(quote, incomingHash);
 		TextView tv = (TextView) findViewById(R.id.quoteField);
 		TextView author = (TextView) findViewById(R.id.authorField);
-		//tv.setText(quote);
+		name = quoteItem[0];
 		tv.setText(quoteItem[1]);
 		author.setText(quoteItem[2]);
-		
+
 	}
 
 	/**
@@ -77,24 +84,30 @@ public class QuotePageActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	public String[] decompileQuote(String name, Hashtable<String, String> table){
+
+	public String[] decompileQuote(String name, Hashtable<String, String> table) {
 		String quote = null;
-		String author = null;		
+		String author = null;
 		String[] quoteSections = new String[3];
 		String tableText = (table.get(name)).toString();
-		for(int i = 0; i<tableText.length(); i++ ){
-			if (tableText.charAt(i) == ','){
+		for (int i = 0; i < tableText.length(); i++) {
+			if (tableText.charAt(i) == ',') {
 				quote = tableText.substring(0, i);
-				author = tableText.substring(i+1, tableText.length());
+				author = tableText.substring(i + 1, tableText.length());
 			}
-		quoteSections[0] = name;
-		quoteSections[1] = quote;
-		quoteSections[2] = author;
-		
+			quoteSections[0] = name;
+			quoteSections[1] = quote;
+			quoteSections[2] = author;
+
 		}
-		
-		
 		return quoteSections;
 	}
 
+	public void playQuote(View view) {
+			MediaPlayer mp = MediaPlayer
+					.create(context, R.raw.tech_agriculture);
+
+			mp.start();
+
+	}
 }

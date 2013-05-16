@@ -4,7 +4,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-        
+    <LinearLayout     
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:orientation="horizontal" >
+    
+        <Button
+    		android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+    		android:layout_weight="2"
+    		android:text="Civ 4" 
+    		android:background="#99CCFF"
+    		android:onClick="loadCiv4"/>
+        <TextView
+            android:layout_height="fill_parent"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:background="#CCCCCC"
+            />
+        <Button
+    		android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+    		android:layout_weight="2"
+    		android:text="Civ 5" 
+    		android:background="#99CCFF"
+    		android:onClick="loadCiv5"/>
+    
+    </LinearLayout>
     <ListView 
 	    android:layout_width="match_parent"
 	    android:id="@+id/listview"

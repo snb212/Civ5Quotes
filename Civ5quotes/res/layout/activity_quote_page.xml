@@ -24,7 +24,16 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:text="author"
-        android:layout_weight="10"
+        android:layout_weight="4"
         android:textSize="24sp" />
+
+    <ImageButton
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:background="@android:color/transparent"
+        android:layout_weight="5"
+        android:onClick="playQuote"
+        android:src="@drawable/play_states" />
 
 </LinearLayout>
