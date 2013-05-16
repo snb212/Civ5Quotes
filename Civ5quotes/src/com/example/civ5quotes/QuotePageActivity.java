@@ -1,6 +1,5 @@
 package com.example.civ5quotes;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Hashtable;
@@ -10,10 +9,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,10 +28,11 @@ public class QuotePageActivity extends Activity {
 		setContentView(R.layout.activity_quote_page);
 		// Show the Up button in the action bar.
 		setupActionBar();
-
 		Intent intent = getIntent();
 		String quote = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
-
+		
+		TextView quoteName = (TextView) findViewById(R.id.quoteName);
+		quoteName.setText(quote);
 		// recieve hash table
 		Hashtable<String, String> incomingHash = null;
 		Serializable data = intent.getSerializableExtra("hash");
@@ -104,10 +104,24 @@ public class QuotePageActivity extends Activity {
 	}
 
 	public void playQuote(View view) {
-			MediaPlayer mp = MediaPlayer
-					.create(context, R.raw.tech_agriculture);
+		//final String test = "R.raw.tech_agriculture";
+		//Uri song = Uri.parse(test);
+		//MediaPlayer mp = MediaPlayer.create(context, R.raw.tech_agriculture);
+		String raw_name = nameToRaw();
+		raw_name = "raw/tech_" + raw_name;
+		//int resId = getResources().getIdentifier("raw/tech_agriculture", null, this.getPackageName());
+		int resId;
+		if(getResources().getIdentifier(raw_name, null, this.getPackageName()) != 0)
+			resId = getResources().getIdentifier(raw_name, null, this.getPackageName());
+		else
+			return;
+		MediaPlayer mp = MediaPlayer.create(context, resId);
+		mp.start();
 
-			mp.start();
-
+	}
+	public String nameToRaw(){
+		String temp = name.toLowerCase();
+		temp = temp.replace(' ', '_');
+		return temp;
 	}
 }
