@@ -38,8 +38,9 @@ public class MainActivity extends Activity {
 		elements = quoteList5.toArray(new String[quoteList5.size()]);
 		
 		lv = (ListView) findViewById(R.id.listview);
-		lv.setAdapter(new ArrayAdapter<String>(this.getApplicationContext(),
-				R.drawable.custom_list_item, elements));
+		lv.setAdapter(new IconArrayAdapter(this.getApplicationContext(), elements));
+		//lv.setAdapter(new ArrayAdapter<String>(this.getApplicationContext(),
+		//		R.drawable.custom_list_item, elements));
 		//this.removeView();
 		//((ViewGroup)MainActivity.getParent()).removeallViews();
 		lv.setOnItemClickListener(new OnItemClickListener(){
@@ -70,8 +71,7 @@ public class MainActivity extends Activity {
 		populatequoteList4();
 		quoteHash = populateHashtable4();
 		elements = quoteList4.toArray(new String[quoteList4.size()]);
-		lv.setAdapter(new ArrayAdapter<String>(this.getApplicationContext(),
-				R.drawable.custom_list_item, elements));
+		lv.setAdapter(new IconArrayAdapter(this.getApplicationContext(), elements));
 	}
 	public void loadCiv5(View view){
 		currentCiv = 5;
@@ -81,8 +81,7 @@ public class MainActivity extends Activity {
 		populatequoteList5();
 		quoteHash = populateHashtable5();
 		elements = quoteList5.toArray(new String[quoteList5.size()]);
-		lv.setAdapter(new ArrayAdapter<String>(this.getApplicationContext(),
-				R.drawable.custom_list_item, elements));
+		lv.setAdapter(new IconArrayAdapter(this.getApplicationContext(), elements));
 	}
 
 	public void populatequoteList5() {

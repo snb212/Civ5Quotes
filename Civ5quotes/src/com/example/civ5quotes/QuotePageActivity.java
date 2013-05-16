@@ -21,7 +21,7 @@ import android.widget.TextView;
 public class QuotePageActivity extends Activity {
 	private final Context context = this;
 	private String name;
-	int currentCiv;
+	static int currentCiv;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// getWindow().setBackgroundDrawableResource(R.drawable.quoteback);
