@@ -21,6 +21,7 @@ import android.widget.TextView;
 public class QuotePageActivity extends Activity {
 	private final Context context = this;
 	private String name;
+	int currentCiv;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// getWindow().setBackgroundDrawableResource(R.drawable.quoteback);
@@ -30,9 +31,7 @@ public class QuotePageActivity extends Activity {
 		setupActionBar();
 		Intent intent = getIntent();
 		String quote = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
-		
-		TextView quoteName = (TextView) findViewById(R.id.quoteName);
-		quoteName.setText(quote);
+		currentCiv = intent.getIntExtra("civStatus", 0);
 		// recieve hash table
 		Hashtable<String, String> incomingHash = null;
 		Serializable data = intent.getSerializableExtra("hash");
@@ -43,10 +42,12 @@ public class QuotePageActivity extends Activity {
 		}
 		String[] quoteItem;
 		quoteItem = decompileQuote(quote, incomingHash);
-		TextView tv = (TextView) findViewById(R.id.quoteField);
+		TextView quoteName = (TextView) findViewById(R.id.quoteName);
+		quoteName.setText("Civ " + Integer.toString(currentCiv) + ": " + quote);
+		TextView quoteField = (TextView) findViewById(R.id.quoteField);
 		TextView author = (TextView) findViewById(R.id.authorField);
 		name = quoteItem[0];
-		tv.setText(quoteItem[1]);
+		quoteField.setText(quoteItem[1]);
 		author.setText(quoteItem[2]);
 
 	}
@@ -104,11 +105,11 @@ public class QuotePageActivity extends Activity {
 	}
 
 	public void playQuote(View view) {
-		//final String test = "R.raw.tech_agriculture";
-		//Uri song = Uri.parse(test);
-		//MediaPlayer mp = MediaPlayer.create(context, R.raw.tech_agriculture);
 		String raw_name = nameToRaw();
-		raw_name = "raw/tech_" + raw_name;
+		if(currentCiv == 5)
+			raw_name = "raw/tech5_" + raw_name;
+		else
+			raw_name = "raw/tech_" + raw_name;
 		//int resId = getResources().getIdentifier("raw/tech_agriculture", null, this.getPackageName());
 		int resId;
 		if(getResources().getIdentifier(raw_name, null, this.getPackageName()) != 0)
@@ -121,7 +122,7 @@ public class QuotePageActivity extends Activity {
 	}
 	public String nameToRaw(){
 		String temp = name.toLowerCase();
-		temp = temp.replace(' ', '_');
+		temp = temp.trim().replaceAll("\\s","");
 		return temp;
 	}
 }

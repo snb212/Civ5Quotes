@@ -23,12 +23,15 @@ public class MainActivity extends Activity {
 	public final static String EXTRA_MESSAGE = "com.example.civ5quotes.MESSAGE";
 	public Hashtable<String, String> quoteHash; 
 	private ListView lv; 
+	int currentCiv;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
+		//start with set Civ 5
+		currentCiv = 5;
 		populatequoteList5();
 		quoteHash = populateHashtable5();
 		
@@ -46,6 +49,7 @@ public class MainActivity extends Activity {
 				quote = (lv.getItemAtPosition(position)).toString();
 				intent.putExtra(EXTRA_MESSAGE, quote);
 				intent.putExtra("hash", quoteHash);
+				intent.putExtra("civStatus", currentCiv);
 				startActivity(intent);
 		     }
 		});
@@ -59,6 +63,7 @@ public class MainActivity extends Activity {
 	}
 	
 	public void loadCiv4(View view){
+		currentCiv = 4;
 		TextView tv = (TextView) findViewById(R.id.civ_status);
 		tv.setText("4");
 		quoteList4.clear();
@@ -69,6 +74,7 @@ public class MainActivity extends Activity {
 				R.drawable.custom_list_item, elements));
 	}
 	public void loadCiv5(View view){
+		currentCiv = 5;
 		TextView tv = (TextView) findViewById(R.id.civ_status);
 		tv.setText("5");
 		quoteList5.clear();
